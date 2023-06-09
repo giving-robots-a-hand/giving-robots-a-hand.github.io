@@ -1,0 +1,856 @@
+  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+  <html>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+  <style type="text/css">
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight:300;
+      font-size:16px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
+
+    pre {
+      background-color: #f6f8fa;
+      padding: 16px;
+    }
+
+    code {
+      font-family: "SFMono-Regular","Consolas","Liberation Mono","Menlo",monospace;
+      overflow: scroll;
+    }
+
+    .description {
+      max-width: 1000px;
+      padding: 0px;
+    }
+
+    #title, h1, h2 {
+      color: #8C1515;
+    }
+
+    h1, h2 {
+      font-family: "Source Sans Pro";
+      font-weight:300;
+      text-align: center;
+    }
+
+    div {
+      max-width: 95%;
+      margin:auto;
+      padding: 10px;
+    }
+
+    .table-like {
+      display: flex;
+      flex-wrap: wrap;
+      flex-flow: row wrap;
+      justify-content: center;
+    }
+
+    .box {
+      padding: 0px;
+      text-align: center;
+      width: 50%;
+    }
+
+    @media screen and (max-width: 1279px) {
+      .box {
+        width: 100%;
+      }
+    }
+
+		.table-like hr {
+			width: 100%;
+      flex-basis: 100%;
+      height: 0;
+      margin: 0;
+      border: 0;
+		}
+
+    .disclaimerbox {
+      background-color: #eee;
+      border: 1px solid #eeeeee;
+      border-radius: 10px ;
+      -moz-border-radius: 10px ;
+      -webkit-border-radius: 10px ;
+      padding: 20px;
+    }
+
+    video.header-vid {
+      height: 140px;
+      border: 1px solid black;
+      border-radius: 10px ;
+      -moz-border-radius: 10px ;
+      -webkit-border-radius: 10px ;
+    }
+
+    img {
+      padding: 0;
+      display: block;
+      margin: 0 auto;
+      max-height: 100%;
+      max-width: 100%;
+    }
+
+    iframe {
+      max-width: 100%;
+    }
+
+    img.header-img {
+      height: 140px;
+      border: 1px solid black;
+      border-radius: 10px ;
+      -moz-border-radius: 10px ;
+      -webkit-border-radius: 10px ;
+    }
+
+    img.rounded {
+      border: 1px solid #eeeeee;
+      border-radius: 10px ;
+      -moz-border-radius: 10px ;
+      -webkit-border-radius: 10px ;
+    }
+
+    a:link,a:visited
+    {
+      color: #1367a7;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #208799;
+    }
+
+    td.dl-link {
+      height: 160px;
+      text-align: center;
+      font-size: 22px;
+    }
+
+    .layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+      box-shadow:
+              0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+              5px 5px 0 0px #fff, /* The second layer */
+              5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+              10px 10px 0 0px #fff, /* The third layer */
+              10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+              15px 15px 0 0px #fff, /* The fourth layer */
+              15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+              20px 20px 0 0px #fff, /* The fifth layer */
+              20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+              25px 25px 0 0px #fff, /* The fifth layer */
+              25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+      margin-left: 10px;
+      margin-right: 45px;
+    }
+
+
+    .layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+      box-shadow:
+              0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+              5px 5px 0 0px #fff, /* The second layer */
+              5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+              10px 10px 0 0px #fff, /* The third layer */
+              10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+      margin-top: 5px;
+      margin-left: 10px;
+      margin-right: 30px;
+      margin-bottom: 5px;
+    }
+
+    .vert-cent {
+      position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    hr
+    {
+      border: 0;
+      height: 1px;
+      max-width: 1100px;
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+
+    #authors td {
+      padding-bottom:5px;
+      padding-top:30px;
+    }
+
+    .mySlides {display: none}
+
+    /* Slideshow container */
+    .slideshow-container {
+      max-width: 1280px;
+      position: relative;
+      margin: auto;
+    }
+
+    /* Next & previous buttons */
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      margin-top: -22px;
+      color: rgb(0, 0, 0);
+      font-weight: bold;
+      font-size: 25px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+    }
+
+    /* Position the "next button" to the right */
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    /* On hover, add a black background color with a little bit see-through */
+    .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    /* Caption text */
+    .caption {
+      color: #000000;
+      font-size: 25;
+      width: 100%;
+      text-align: center;
+      padding: 0px;
+    }
+
+    /* Number text (1/3 etc) */
+    .numbertext {
+      color: #000000;
+      font-size: 18px;
+      padding: 8px 12px;
+      position: absolute;
+      top: 0;
+    }
+
+    /* The dots/bullets/indicators */
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    .active, .dot:hover {
+      background-color: #717171;
+    }
+
+    /* Fading animation */
+    .fade {
+      animation-name: fade;
+      animation-duration: 1.5s;
+    }
+
+    @keyframes fade {
+      from {opacity: .4} 
+      to {opacity: 1}
+    }
+
+    /* On smaller screens, decrease text size */
+    @media only screen and (max-width: 300px) {
+      .prev, .next,.text {font-size: 11px}
+    }
+    
+    /* For the button used to expand the page */
+    .collapsible {
+      background-color: rgba(117, 235, 204, 0.3);
+      color: black;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: center;
+      outline: none;
+      font-size: 18px;
+      margin: auto;
+    }
+
+    /* Add a background color to the button if you move the mouse over it (hover) */
+    .collapsible:hover {
+      background-color: rgba(117, 235, 204, 0.5);
+    }
+
+    /* Style the collapsible content. Note: hidden by default */
+    .content {
+      display: none;
+      overflow: hidden;
+    }
+  </style>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <head>
+  <div max-width=100%>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Giving Robots a Hand: Learning Generalizable Manipulation with Eye-in-Hand Human Video Demonstrations</title>
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="no-referrer-when-downgrade" />
+</head>
+
+<body>
+
+      <br>
+      <center><span id="title" style="font-size:28px;font-weight:bold;font-family:Source Sans Pro;"><font size="+4">Giving Robots a Hand:</font><br>Learning Generalizable Manipulation with Eye-in-Hand Human Video Demonstrations</span></center><br/>
+      <!-- <div class="table-like" style="justify-content:space-evenly;max-width:1000px;margin:auto;">
+          <hr>
+          <center><span style="font-size:25px" class="line-break">Anonymous authors</span></center>
+      </div> -->
+      <!-- <div class="table-like" style="justify-content:space-evenly;max-width:1000px;margin:auto;">
+          <hr>
+          <center><span style="font-size:20px" class="line-break"><a href="TODO">Paper</a></span></center>
+      </div> -->
+      
+      <div style="width:800px; margin:0 auto" align="justify">
+        <p><b>Abstract (abridged).</b> Eye-in-hand cameras have shown promise in enabling greater sample efficiency and generalization in vision-based robotic manipulation. However, for robotic imitation, it is still expensive to have a human teleoperator collect large amounts of expert demonstrations with a real robot. Videos of humans performing tasks, on the other hand, are much cheaper to collect since they eliminate the need for expertise in robotic teleoperation and can be quickly captured in a wide range of scenarios. Therefore, human video demonstrations are a promising data source for learning generalizable robotic manipulation policies at scale. In this work, we augment narrow robotic imitation datasets with broad unlabeled human video demonstrations to greatly enhance the generalization of eye-in-hand visuomotor policies. On a suite of eight real-world tasks involving both 3-DoF and 6-DoF robot arm control, our method improves the success rates of eye-in-hand manipulation policies by 58% (absolute) on average, enabling robots to generalize to both new environment configurations and new tasks that are unseen in the robot demonstration data.</p>
+      </div>
+
+      <div style="max-width:1000px">
+      <hr>
+      <h1>Method Overview</h1>
+        <p>
+          As shown below on the left, we incorporate diverse eye-in-hand human video demonstrations to train behavioral cloning policies that can generalize to <u>new environments</u> and <u>new tasks</u> outside the distribution of expert robot imitation data. In our method, images are masked to close the domain gap between the human and robot observations. Action labels for human video demonstrations are inferred by an inverse dynamics model that is trained on robot play data. We record robot and human eye-in-hand videos with the low-cost camera configurations shown below on the right.
+        </p>
+        <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+          <img src="resources/figures/figure-1_and_wrist-cam-setup.001.jpeg" alt="Teaser figure and wrist camera setup figure" style="width:1000px;margin:0;">
+        </div>
+      </div>
+
+      <!-- <div style="max-width:1000px;">
+        <hr>
+        <center><h1>Types of Generalization</h1></center>
+        <p>
+          In this work, we aim to improve robotic manipulation performance in terms of two types of generalization:
+        </p>
+        <ul>
+          <li><b>Environment generalization:</b> the ability to execute a learned manipulation task in a new environment outside the distribution of expert robot demonstration data</li>
+          <li><b>Task generalization:</b> the ability to execute a new, longer-horizon task when the expert robot demonstrations only perform an easier, shorter-horizon task</li>
+        </ul>
+      </div> -->
+
+      <!-- <div style="max-width:1000px;">
+        <hr>
+        <center><h1>Environment Generalization Tasks</h1></center>
+        <p>
+          Tasks used for environment generalization experiments are shown below. Expert robot demonstrations are collected only in the environment configurations highlighted in <span style="color:magenta;">pink</span>, while expert human demonstrations are collected in the configurations highlighted in <span style="color:blue;">blue</span>. In the toy packing task, the toys highlighted in <span style="color:darkgreen;">green</span> are not seen in the human or robot demonstrations but appear in the robot play dataset, while the toys highlighted in <span style="color:rgb(210, 210, 31);">yellow</span> are not seen at all in human or robot play/demonstration data (i.e., these are fully held out).
+        </p>
+        <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+          <img src="resources/figures/env-gen-tasks.001.jpeg" alt="Teasure figure">
+        </div>
+      </div> -->
+
+      <!-- <div style="max-width:1000px;">
+        <hr>
+        <center><h1>Task Generalization Tasks</h1></center>
+        <p>
+          Tasks used for task generalization experiments are shown below. Expert robot demonstrations perform an easier, shorter-horizon task, such as grasping <span style="color:magenta;">pink</span>; expert human demonstrations either perform the full task or portions of the task that are missing in the robot demonstrations (highlighted in <span style="color:blue;">blue</span>).
+        </p>
+        <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+          <img src="resources/figures/task-gen-tasks.001.jpeg" alt="Teasure figure">
+        </div>
+      </div> -->
+
+
+      <div style="max-width:1000px">
+        <hr>
+        <h1>Generalizing to New Environments</h1>
+        <p>
+          In this section, we show rollouts of learned policies being evaluated in environment configurations outside the distribution of expert robot demonstrations. In our experiments, we evaluate behavioral cloning policies trained on four different combinations of eye-in-hand video data:
+        </p>
+        <ul style="margin-bottom: 40px;">
+          <li><b>robot</b> = robot demos only</li>
+          <li><b>robot + play</b> = robot demos + robot play data</li>
+          <li><b>robot + human w/ CycleGAN</b> = robot demos + CycleGAN-translated human demos</li>
+          <li><b style="background-color: rgba(0, 255, 0, 0.4);"><u>robot + human w/ mask (ours)</u></b> = robot demos + human demos with image masking</li>
+        </ul>
+        <p>
+          In our qualitative analysis, we place an emphasis on the toy packing task, which is the most challenging task in this work due to the presence of heavy visual occlusion, 6-DoF robot arm control, and small target objects. We also include some analysis on other tasks afterwards.
+        </p>
+        <h2>Toy Packing Task</h2>
+        <p>
+          Here are sample evaluation trials where the simplest baseline policy trained only on robot demonstrations fails to generalize to unseen target objects, while our method succeeds. Overall, the former policy often fails to reach the target object; in cases where it does reach it, the robot consistently fails to even grasp the toy. In contrast, our method successfully completes the full task given varied target objects since it learns to generalize from the visually diverse human demonstrations seen at training time. All clips are sped up by 7x.
+        </p>
+        <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+          <div>
+            <center style="margin-bottom:5px"><b>robot</b></center>
+            <video width="450" autoplay muted loop>
+              <source src="resources/videos/toy-packing-env-gen/toy-packing_env-gen_robot-only_rollouts.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div style="background-color: rgba(0, 255, 0, 0.4);">
+            <center style="margin-bottom:5px"><b><u>robot + human w/ mask (ours)</u></b></center>
+            <video width="450" autoplay muted loop>
+              <source src="resources/videos/toy-packing-env-gen/toy-packing_env-gen_robot+human+crop_rollouts.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <p>
+          Below are sample rollouts of the other two baseline methods. Although these methods successfully complete the task in some cases, they are far less reliable than our method. In particular, the policy trained on play data often exhibits unstable, noisy behavior, which we attribute to the inherent multimodality and task-agnostic nature of the play data. On the other hand, the policy trained on CycleGAN-translated human demonstrations generalizes to the unseen objects substantially better but manifests other difficulties, such as grasping the toy precariously and rotating the end-effector excessively. All clips are sped up by 9x.
+        </p>
+        <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+          <div>
+            <center style="margin-bottom:5px"><b>robot + play</b></center>
+            <video width="450" autoplay muted loop>
+              <source src="resources/videos/toy-packing-env-gen/toy-packing_env-gen_robot+play_rollouts.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div>
+            <center style="margin-bottom:5px"><b>robot + human w/ CycleGAN</b></center>
+            <video width="450" autoplay muted loop>
+              <source src="resources/videos/toy-packing-env-gen/toy-packing_env-gen_robot+human+cyclegan_rollouts.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <h2>Sample Policy Rollouts in Other Tasks</h2>
+        <p>
+          Here we briefly show sample evaluation trials in other tasks.
+          <b>Left two columns:</b> In the plate clearing task, the baseline policy fails to generalize to an unseen yellow sponge, while our method completes the task.
+          <b>Right two columns:</b> In the reaching task, the baseline policy fails to reach the red cube in the presence of unseen distractor objects, while our method succeeds. All clips are sped up by 4x.
+        </p>
+        <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;margin-bottom: 20px;">
+          <div style="max-width:100%;margin:0px;padding:0px;display:block">
+            <div style="max-width:100%;margin:0px;padding:0px;display:flex">
+              <div>
+                <center style="margin-bottom:5px;font-size:14px;"><b>robot</b></center>
+                <video width="210" autoplay muted loop>
+                  <source src="resources/videos/plate-clearing_env-gen/plate-clearing_env-gen_robot-only_rollout.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div style="background-color: rgba(0, 255, 0, 0.4);">
+                <center style="margin-bottom:5px;font-size:14px;"><b><u>robot + human w/ mask (ours)</u></b></center>
+                <video width="210" autoplay muted loop>
+                  <source src="resources/videos/plate-clearing_env-gen/plate-clearing_env-gen_robot+human+crop_rollout.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <center style="margin-top:10px;color: #8C1515;font-size: 18px;">plate clearing</center>
+          </div>
+          <div style="max-width: 100%;margin:0px;padding:0px;display:block">
+            <div style="max-width:100%;margin:0px;padding:0px;display:flex">
+              <div>
+                <center style="margin-bottom:5px;font-size:14px;"><b>robot</b></center>
+                <video width="210" autoplay muted loop>
+                  <source src="resources/videos/reaching_env-gen/reaching_env-gen_robot-only_rollout.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div style="background-color: rgba(0, 255, 0, 0.4);">
+                <center style="margin-bottom:5px;font-size:14px;"><b><u>robot + human w/ mask (ours)</u></b></center>
+                <video width="210" autoplay muted loop>
+                  <source src="resources/videos/reaching_env-gen/reaching_env-gen_robot+human+crop_rollout.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <center style="margin-top:10px;color: #8C1515;font-size: 18px;">reaching</center>
+          </div>
+        </div>
+      </div>
+
+
+      <div style="max-width:1000px">
+        <hr>
+        <h1>Generalizing to New Tasks</h1>
+        <p>
+          In this section, we evaluate whether learned policies can complete tasks that are not demonstrated in the expert robot demonstrations. For instance, in the toy packing task, the robot data demonstrates how to reach around the wall, reach the toy, and grasp the toy. Meanwhile, only the human demonstrations complete the rest of the task: lift the toy, move above the open box, and release the toy into the box. We evaluate the same four methods seen in the previous section.
+        </p>
+        <h2>Toy Packing Task</h2>
+        <p>
+          As shown below, a policy trained on robot demonstrations with only reaching and grasping behaviors is unable to complete the full task, as expected. In contrast, our method can transfer the skills seen in the human demonstrations to the real robot in order to finish the task. All clips are sped up by 7x.
+        </p>
+        <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+          <div>
+            <center style="margin-bottom:5px"><b>robot</b></center>
+            <video width="450" autoplay muted loop>
+              <source src="resources/videos/toy-packing-task-gen/toy-packing_task-gen_robot_rollouts.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div style="background-color: rgba(0, 255, 0, 0.4);">
+            <center style="margin-bottom:5px"><b><u>robot + human w/ mask (ours)</u></b></center>
+            <video width="450" autoplay muted loop>
+              <source src="resources/videos/toy-packing-task-gen/toy-packing_task-gen_robot+human+crop_rollouts.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <p>
+          Below are sample rollouts from the other two baseline methods. The policy trained on play data exhibits large variance: it succeeds smoothly in some trials yet fails with noisy behavior in others. Meanwhile, the policy trained on CycleGAN-translated human demonstrations is never able to complete this task, as it erroneously rotates the end-effector sideways after grasping the toy. All clips are sped up by 7x.
+        </p>
+        <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+          <div>
+            <center style="margin-bottom:5px"><b>robot + play</b></center>
+            <video width="450" autoplay muted loop>
+              <source src="resources/videos/toy-packing-task-gen/toy-packing_task-gen_robot+play_rollouts.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div>
+            <center style="margin-bottom:5px"><b>robot + human w/ CycleGAN</b></center>
+            <video width="450" autoplay muted loop>
+              <source src="resources/videos/toy-packing-task-gen/toy-packing_task-gen_robot+human+cyclegan_rollouts.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <h2>Sample Policy Rollouts in Other Tasks</h2>
+        <p>
+          Here we briefly show sample evaluation trials in the cube stacking task.
+          <b>Left:</b> The policy trained on play data exhibits seemingly random behaviors, mimicking the multimodal nature of the play data.
+          <b>Middle:</b> The policy trained on CycleGAN-translated human demonstrations nearly completes the task, just failing to release the red cube in the end.
+          <b>Right:</b> Our method, though imperfect, successfully stacks the cubes. All clips are sped up by 2x.
+        </p>
+        <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;margin-bottom:0px;">
+          <div>
+            <center style="margin-bottom:5px"><b>robot + play</b></center>
+            <video width="290" autoplay muted loop>
+              <source src="resources/videos/cube-stacking/cube-stacking_task-gen_robot+play_rollouts.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div>
+            <center style="margin-bottom:5px"><b>robot + human w/ CycleGAN</b></center>
+            <video width="290" autoplay muted loop>
+              <source src="resources/videos/cube-stacking/cube-stacking_task-gen_robot+human+cyclegan_rollouts.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div style="background-color: rgba(0, 255, 0, 0.4);">
+            <center style="margin-bottom:5px"><b><u>robot + human w/ mask (ours)</u></b></center>
+            <video width="290" autoplay muted loop>
+              <source src="resources/videos/cube-stacking/cube-stacking_task-gen_robot+human+crop_rollouts.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <center style="color: #8C1515;font-size: 18px;margin-top: 0px;margin-bottom: 30px;">cube stacking</center>
+        <p>
+          The inability of the robot to release the target object at the end of the task is a common failure mode for the policy trained on CycleGAN-translated human demonstrations. For example, in the cube pick-and-place task (left) and plate clearing task (right) below, the policy often fails to release the target object. All videos are sped up by 4x.
+        </p>
+        <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;margin-bottom: 0px;">
+          <div style="margin:0px;">
+            <center style="margin-bottom:5px"><b>robot + human w/ CycleGAN</b></center>
+            <video width="290" autoplay muted loop>
+              <source src="resources/videos/cube-pick-place/cube-pick-place_task-gen_robot+human+cyclegan_rollouts.mp4" type="video/mp4">
+            </video>
+            <center style="color: #8C1515;font-size: 18px;margin-top:10px;">cube pick-and-place</center>
+          </div>
+          <div style="margin:0px;">
+            <center style="margin-bottom:5px"><b>robot + human w/ CycleGAN</b></center>
+            <video width="290" autoplay muted loop>
+              <source src="resources/videos/plate-clearing_task-gen/plate-clearing_task-gen_robot+human+cyclegan_rollouts.mp4" type="video/mp4">
+            </video>
+            <center style="color: #8C1515;font-size: 18px;margin-top:10px;">plate clearing</center>
+          </div>
+        </div>
+      </div>
+
+
+      <div style="max-width:1000px">
+        <hr>
+        <h1>Eye-in-Hand Video Replay of Toy Packing Task</h1>
+        <p>
+          Here we show a sample rollout of our method, captured by a third-person camera and an eye-in-hand camera mounted on the robot's wrist. Recall that the policy's sole input is the masked eye-in-hand image (no third-person images). Consequently, the toy packing task is challenging because the target object is initially fully occluded in the eye-in-hand camera view, and there is severe partial observability throughout the whole episode. In addition, the policy must perform obstacle avoidance and manipulate in the full SE(3) space. Nevertheless, we can train effective policies that complete the task despite the challenges.
+        </p>
+        <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+          <div>
+            <center style="margin-bottom:5px"><b>third-person video</b></center>
+            <video height="320" autoplay muted loop>
+              <source src="resources/videos/eye-in-hand-videos/2-white-mummy-third-person.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div>
+            <center style="margin-bottom:5px"><b>(masked) eye-in-hand video</b></center>
+            <video height="320" autoplay muted loop>
+              <source src="resources/videos/eye-in-hand-videos/2-white-mummy-eye-in-hand_cropped.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="collapsible" id="expand-button" style="margin-top: 10px;">Click here to see the play datasets and expert video demonstrations we collected for our experiments.</button>
+      <div class="content">
+        <div style="max-width:1000px" id="playdata">
+          <h1>Play Datasets for Inverse Dynamics Model Training</h1>
+          <p>
+            We train four inverse dynamics models that are used to label the human video demonstrations with actions. Each inverse model is trained on a robot play dataset and is shared for one environment generalization experiment and one task generalization experiment.  When training the inverse models, we mask a fixed portion of every input image and train the models only on masked data. Sample clips from the four play datasets we collected are shown below, along with their masked versions. All videos are sped up by 3x.
+          </p>
+          <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+            <div>
+              <center style="margin-bottom:5px"><b>Play Dataset #1</b><br>(Tasks: reaching & cube stacking)</center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/play-data/play_dataset1_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/play-data/play_dataset1_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div>
+              <center style="margin-bottom:5px"><b>Play Dataset #2</b><br>(Tasks: cube grasping & cube pick-and-place)</center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/play-data/play_dataset2_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/play-data/play_dataset2_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div>
+              <center style="margin-bottom:5px"><b>Play Dataset #3</b><br>(Tasks: plate clearing)</center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/play-data/play_dataset3_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/play-data/play_dataset3_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div>
+              <center style="margin-bottom:5px"><b>Play Dataset #4</b><br>(Tasks: toy packing)</center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/play-data/play_dataset4_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/play-data/play_dataset4_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+        <div style="max-width:1000px">
+          <hr>
+          <h1>Expert Video Demonstrations for Behavioral Cloning</h1>
+          <p style="margin-bottom: 60px;">
+            For each environment generalization and task generalization task, we collect expert robot video demonstrations and expert human video demonstrations. The robot demonstrations are narrow, while the human demonstrations are visually and/or behaviorally diverse. We mask a fixed portion of every image (as done with the play datasets) and show both the original and masked versions of the videos below. The masked versions are used for training policies under our method. All videos are sped up by 3x.
+          </p>
+          <h2>Reaching Task (Environment Generalization)</h2>
+          <center style="min-height:10px;overflow:hidden;">
+            <b>Left:</b> sample robot demonstrations with no distractors (only red cube)<br><b>Right:</b> sample human demonstrations with red cube and two distractors (blue cube and green sponge)
+          </center>
+          <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;margin-top: 0px;margin-bottom: 60px;">
+            <div>
+              <center style="margin-top:10px;margin-bottom:10px"><b>robot demonstrations</b></center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/reaching_env-gen/reaching-robot-demos_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/reaching_env-gen/reaching-robot-demos_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div>
+              <center style="margin-top:10px;margin-bottom:10px"><b>human demonstrations</b></center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/reaching_env-gen/reaching-human-demos_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/reaching_env-gen/reaching-human-demos_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <h2>Cube Grasping Task (Environment Generalization)</h2>
+          <center>
+            <b>Left:</b> sample robot demonstrations where the cube rests on a plain white background<br><b>Right:</b> sample human demonstrations with each of the following backgrounds: rainbow floral texture, green floral texture, blue floral texture, orange plate, green plate, and blue plate
+          </center>
+          <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;margin-top: 0px;margin-bottom: 60px;">
+            <div>
+              <center style="margin-top:10px;margin-bottom:10px"><b>robot demonstrations</b></center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/cube-grasping/cube-grasping_robot-demos_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/cube-grasping/cube-grasping_robot-demos_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div>
+              <center style="margin-top:10px;margin-bottom:10px"><b>human demonstrations</b></center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/cube-grasping/cube-grasping_human-demos_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/cube-grasping/cube-grasping_human-demos_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <h2>Plate Clearing Task (Environment Generalization)</h2>
+          <center>
+            <b>Left:</b> sample robot demonstrations where the only target object is a green sponge<br><b>Right:</b> sample human demonstrations with each of the following target objects: yellow sponge, blue towel, and pink towel
+          </center>
+          <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;margin-top: 0px;margin-bottom: 60px;">
+            <div>
+              <center style="margin-top:10px;margin-bottom:10px"><b>robot demonstrations</b></center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/plate-clearing_env-gen/plate-clearing_robot-demos_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/plate-clearing_env-gen/plate-clearing_robot-demos_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div>
+              <center style="margin-top:10px;margin-bottom:10px"><b>human demonstrations</b></center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/plate-clearing_env-gen/plate-clearing_human-demos_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/plate-clearing_env-gen/plate-clearing_human-demos_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <h2>Toy Packing Task (Environment Generalization)</h2>
+          <center>
+            <b>Left:</b> sample robot demonstrations where the only target object is a black suit vampire toy<br><b>Right:</b> sample human demonstrations with each of the following toys: white mummy toy, orange body jack-o'-lantern toy, red cape vampire toy, purple body green zombie toy, and crazy witch toy
+          </center>
+          <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;margin-top:0px;margin-bottom: 60px;">
+            <div>
+              <center style="margin-top:10px;margin-bottom:10px"><b>robot demonstrations</b></center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/toy-packing-env-gen/toy-packing_robot-demos_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/toy-packing-env-gen/toy-packing_robot-demos_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div>
+              <center style="margin-top:10px;margin-bottom:10px"><b>human demonstrations</b></center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/toy-packing-env-gen/toy-packing_human-demos_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/toy-packing-env-gen/toy-packing_human-demos_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <hr style="margin-bottom: 60px;">
+          <h2>Cube Stacking Task (Task Generalization)</h2>
+          <center>
+            <b>Left:</b> sample robot demonstrations where the expert only grasps the red cube<br><b>Right:</b> sample human demonstrations where the expert performs portions of the stacking task after the grasp
+          </center>
+          <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;margin-top:0px;margin-bottom: 60px;"">
+            <div>
+              <center style="margin-top:10px;margin-bottom:10px"><b>robot demonstrations</b></center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/cube-stacking/cube-stacking_robot-grasping-demos_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/cube-stacking/cube-stacking_robot-grasping-demos_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div>
+              <center style="margin-top:10px;margin-bottom:10px"><b>human demonstrations</b></center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/cube-stacking/cube-stacking_human-demos_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/cube-stacking/cube-stacking_human-demos_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <h2>Cube Pick-and-Place Task (Task Generalization)</h2>
+          <center>
+            <b>Left:</b> sample robot demonstrations where the expert only grasps the cube<br><b>Right:</b> sample  human demonstrations where the expert performs the full cube pick-and-place task
+          </center>
+          <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;margin-top:0px;margin-bottom: 60px;"">
+            <div>
+              <center style="margin-top:10px;margin-bottom:10px"><b>robot demonstrations</b></center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/cube-pick-place/cube-pick-place_robot-demos_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/cube-pick-place/cube-pick-place_robot-demos_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div>
+              <center style="margin-top:10px;margin-bottom:10px"><b>human demonstrations</b></center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/cube-pick-place/cube-pick-place_human-demos_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/cube-pick-place/cube-pick-place_human-demos_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <h2>Plate Clearing Task (Task Generalization)</h2>
+          <center>
+            <b>Left:</b> sample robot demonstrations where the expert only grasps the target object (green sponge)<br><b>Right:</b> sample human demonstrations where expert performs portions of the plate clearing task after the grasp
+          </center>
+          <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;margin-top:0px;margin-bottom: 60px;">
+            <div>
+              <center style="margin-top:10px;margin-bottom:10px"><b>robot demonstrations</b></center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/plate-clearing_task-gen/plate-clearing_robot-demos_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/plate-clearing_task-gen/plate-clearing_robot-demos_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div>
+              <center style="margin-top:10px;margin-bottom:10px"><b>human demonstrations</b></center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/plate-clearing_task-gen/plate-clearing_human-demos_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/plate-clearing_task-gen/plate-clearing_human-demos_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <h2>Toy Packing Task (Task Generalization)</h2>
+          <center>
+            <b>Left:</b> sample robot demonstrations where the expert only grasps the target object (black suit vampire toy)<br><b>Right:</b> sample human demonstrations where expert performs portions of the toy packing task after the grasp
+          </center>
+          <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;margin-top:0px;">
+            <div>
+              <center style="margin-top:10px;margin-bottom:10px"><b>robot demonstrations</b></center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/toy-packing-task-gen/toy-packing_robot-demos_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/toy-packing-task-gen/toy-packing_robot-demos_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div>
+              <center style="margin-top:10px;margin-bottom:10px"><b>human demonstrations</b></center>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/toy-packing-task-gen/toy-packing_human-demos_sample.mp4" type="video/mp4">
+              </video>
+              <video width="200" autoplay muted loop>
+                <source src="resources/videos/toy-packing-task-gen/toy-packing_human-demos_cropped_sample.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Script for expanding page when button is clicked -->
+      <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+            document.getElementById('playdata').scrollIntoView();
+          });
+        }
+      </script>
+      <div style="width:900px;font-size: x-small;margin-top: 10px;">
+        <center>This website is adapted from <a href="https://pathak22.github.io/modular-assemblies/">this website</a>.</center>
+      </div>
+</body>
+</html>
